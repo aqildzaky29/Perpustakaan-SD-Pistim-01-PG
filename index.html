@@ -1046,21 +1046,22 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
 
-  <!-- Firebase SDK versi CDN -->
+  <!-- Firebase SDK versi CDN Compat -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
-  <!-- JavaScript Logika Aplikasi & Firebase -->
+  <!-- JavaScript Logika Aplikasi & Konfigurasi Firebase Baru -->
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyB8U1JUGqXSqi4YZ_aSxKtjaWkt3kkaIcU",
-      authDomain: "perpussdpistim01.firebaseapp.com",
-      databaseURL: "https://perpussdpistim01-default-rtdb.firebaseio.com",
-      projectId: "perpussdpistim01",
-      storageBucket: "perpussdpistim01.firebasestorage.app",
-      messagingSenderId: "53972535051",
-      appId: "1:53972535051:web:b29a2b700de1621a0ec40e"
+      apiKey: "AIzaSyAIGCsZvluuqBXfSEk7RJWg-g9-T5Zh6Ig",
+      authDomain: "perpustakaan-pistim-01.firebaseapp.com",
+      databaseURL: "https://perpustakaan-pistim-01-default-rtdb.firebaseio.com",
+      projectId: "perpustakaan-pistim-01",
+      storageBucket: "perpustakaan-pistim-01.firebasestorage.app",
+      messagingSenderId: "610408499609",
+      appId: "1:610408499609:web:ace89131af9378f94aab08",
+      measurementId: "G-DXHW4VS2KC"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -1263,7 +1264,7 @@
         { id: 182, title: "Buku Geometri Bangun Ruang", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
         { id: 183, title: "Buku Statistika Dasar Anak", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
         { id: 184, title: "Buku Aljabar Permainan", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
-        { id: 185, title: "Buku Peng pengukuran Panjang Dan Berat", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
+        { id: 185, title: "Buku Pengukuran Panjang Dan Berat", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
         { id: 186, title: "Buku Waktu Dan Kalender", author: "Sekolah", category: "Matematika", stock: 6, cover: "📙" },
         { id: 187, title: "Buku Akhlak Mulia Sehari-Hari", author: "Sekolah", category: "Agama", stock: 5, cover: "📖" },
         { id: 188, title: "Buku Kisah 25 Nabi Dan Rasul", author: "Sekolah", category: "Agama", stock: 5, cover: "📖" },
@@ -1510,7 +1511,6 @@
       const st = $("loanStatusFilter").value;
       const worldToday = getWorldToday();
       
-      // Secara default pada menu Peminjaman, tampilkan transaksi hari ini atau yang masih aktif (belum dikembalikan)
       const arr = data.loans.filter(l => {
         const matchesQuery = (!q || l.student.toLowerCase().includes(q) || (bookById(l.bookId)?.title || "").toLowerCase().includes(q) || (l.kelas || "").toLowerCase().includes(q));
         const matchesStatus = (!st || l.status === st);
@@ -1572,9 +1572,7 @@
       }
       const selectedDate = $("reportDateFilter").value;
       
-      // Filter peminjaman yang dicatat pada tanggal tersebut
       const filteredLoans = data.loans.filter(l => l.borrow === selectedDate);
-      // Hitung juga buku yang masih belum dikembalikan (masih aktif dipinjam hingga tanggal ini atau sebelumnya)
       const activeStillBorrowed = data.loans.filter(l => l.status !== "Dikembalikan");
       
       $("reportStats").innerHTML = 
